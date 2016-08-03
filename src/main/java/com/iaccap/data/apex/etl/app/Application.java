@@ -40,25 +40,24 @@ public class Application implements StreamingApplication
     public static class JsonDataEmitterOperator extends BaseOperator implements InputOperator
     {
         public static String jsonSample = "{\n" +
-                "                \"application\": \"FlightTracker\",\n" +
+                "                \"application\": \"Thermometer\",\n" +
                 "                \"applicationBuildVersion\": \"1.0.0\",\n" +
                 "                \"applicationBuildDate\": \"2006-01-01\",\n" +
                 "                \"eventType\": \"PageView\",\n" +
                 "                \"eventTimestamp\": \"2015-11-04T09:00:31.234Z\",\n" +
                 "                \"httpMethod\": \"GET\",\n" +
-                "                \"httpUrl\": \"http://dev.getflightinfo.com/#/\",\n" +
+                "                \"httpUrl\": \"http://www.thermometer.com/#/\",\n" +
                 "                \"clientBrowserLanguage\": \"en-US\",\n" +
                 "                \"httpResponseCode\": 204,\n" +
-                "                \"clientIp\": \"10.90.156.92\",\n" +
-                "                \"serverName\": \"dfdevgflinfofe1.df.jabodo.com\",\n" +
+                "                \"clientIp\": \"102.93.156.12\",\n" +
+                "                \"serverName\": \"fe1.thermometer.net\",\n" +
                 "                \"clientUserAgent\": \"Mozilla/5.0 (Windows NT 6.2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.80 Safari/537.36\",\n" +
-                "                \"responseTime\": 1,\n" +
-                "                \"responseSize\": 0,\n" +
+                "                \"httpResponseTime\": 1,\n" +
+                "                \"httpResponseSize\": 0,\n" +
                 "                \"uniqueUserId\": \"3AC3D4B1-4642-44C7-AE7A-DF8EC8709C9F\",\n" +
-                "                \"sessionId\": 1404609631,\n" +
                 "                \"clientScreenWidth\": 1360,\n" +
                 "                \"clientScreenHeight\": 768,\n" +
-                "                \"clientColorDepth\": 24,\n" +
+                "                \"clientScreenColorDepth\": 24,\n" +
                 "                \"backFillRequired\": false\n" +
                 "}";
 
