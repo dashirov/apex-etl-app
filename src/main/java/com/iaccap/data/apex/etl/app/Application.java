@@ -5,7 +5,6 @@ package com.iaccap.data.apex.etl.app;
 
 import com.datatorrent.api.*;
 import com.datatorrent.common.util.BaseOperator;
-import com.datatorrent.contrib.parser.JsonParser;
 import com.datatorrent.lib.appdata.schemas.SchemaUtils;
 import org.apache.hadoop.conf.Configuration;
 
