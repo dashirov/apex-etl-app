@@ -1,2 +1,3 @@
-terget/
-.idea/
+target/**
+*.iml
+.idea/**
