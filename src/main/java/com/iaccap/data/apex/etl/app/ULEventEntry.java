@@ -65,64 +65,8 @@ public class ULEventEntry extends KryoJdkContainer<ULEvent> implements Serializa
         if (this == o) return true;
 
         if (o == null || getClass() != o.getClass()) return false;
-        ULEventEntry rfe = (ULEventEntry) o;
-        ULEvent rf = rfe.getComponent();
-        ULEvent ulEvent = getComponent();
-
-        return new EqualsBuilder()
-                .append(rf.getEventId(), ulEvent.getEventId())
-                .append(rf.getEventPartId(), ulEvent.getEventPartId())
-                .append(rf.getApplication(), ulEvent.getApplication())
-                .append(rf.getApplicationBuildVersion(), ulEvent.getApplicationBuildVersion())
-                .append(rf.getApplicationBuildDate(), ulEvent.getApplicationBuildDate())
-                .append(rf.getEventName(), ulEvent.getEventName())
-                .append(rf.getEventDate(), ulEvent.getEventDate())
-                .append(rf.getEventTimestamp(), ulEvent.getEventTimestamp())
-                .append(rf.getServerName(), ulEvent.getServerName())
-                .append(rf.getUrl(), ulEvent.getUrl())
-                .append(rf.getUrlProtocol(), ulEvent.getUrlProtocol())
-                .append(rf.getUrlDomain(), ulEvent.getUrlDomain())
-                .append(rf.getUrlPath(), ulEvent.getUrlPath())
-                .append(rf.getUrlPage(), ulEvent.getUrlPage())
-                .append(rf.getUrlQueryString(), ulEvent.getUrlQueryString())
-                .append(rf.getHttpMethod(), ulEvent.getHttpMethod())
-                .append(rf.getHttpCookies(), ulEvent.getHttpCookies())
-                .append(rf.getHttpPostData(), ulEvent.getHttpPostData())
-                .append(rf.getHttpContentType(), ulEvent.getHttpContentType())
-                .append(rf.getHttpResponseCode(), ulEvent.getHttpResponseCode())
-                .append(rf.getHttpResponseTime(), ulEvent.getHttpResponseTime())
-                .append(rf.getHttpResponseSize(), ulEvent.getHttpResponseSize())
-                .append(rf.getClientIp(), ulEvent.getClientIp())
-                .append(rf.getClientIpHash(), ulEvent.getClientIpHash())
-                .append(rf.getClientContinent(), ulEvent.getClientContinent())
-                .append(rf.getClientCountry(), ulEvent.getClientCountry())
-                .append(rf.getClientCity(), ulEvent.getClientCity())
-                .append(rf.getClientState(), ulEvent.getClientState())
-                .append(rf.getClientCounty(), ulEvent.getClientCounty())
-                .append(rf.getClientNetwork(), ulEvent.getClientNetwork())
-                .append(rf.getClientNetworkThroughput(), ulEvent.getClientNetworkThroughput())
-                .append(rf.getClientDMA(), ulEvent.getClientDMA())
-                .append(rf.getClientMSA(), ulEvent.getClientMSA())
-                .append(rf.getClientFIPS(), ulEvent.getClientFIPS())
-                .append(rf.getClientTimeZone(), ulEvent.getClientTimeZone())
-                .append(rf.getClientZipCode(), ulEvent.getClientZipCode())
-                .append(rf.getClientPMSA(), ulEvent.getClientPMSA())
-                .append(rf.getClientAreaCode(), ulEvent.getClientAreaCode())
-                .append(rf.getClientLatitude(), ulEvent.getClientLatitude())
-                .append(rf.getClientLongitude(), ulEvent.getClientLongitude())
-                .append(rf.getClientCompany(), ulEvent.getClientCompany())
-                .append(rf.getClientUserAgent(), ulEvent.getClientUserAgent())
-                .append(rf.getClientBrowserType(), ulEvent.getClientBrowserType())
-                .append(rf.getClientBrowserVersion(), ulEvent.getClientBrowserVersion())
-                .append(rf.getClientBrowserLanguage(), ulEvent.getClientBrowserLanguage())
-                .append(rf.getClientPlatformType(), ulEvent.getClientPlatformType())
-                .append(rf.getClientPlatformVersion(), ulEvent.getClientPlatformVersion())
-                .append(rf.getClientScreenWidth(), ulEvent.getClientScreenWidth())
-                .append(rf.getClientScreenHeight(), ulEvent.getClientScreenHeight())
-                .append(rf.getClientColorDepth(), ulEvent.getClientColorDepth())
-                .append(rf.getBackFillRequired(), ulEvent.getBackFillRequired())
-                .append(rf.getEventDetail(), ulEvent.getEventDetail())
-                .isEquals();
+        if (this.getComponent() == null || ((ULEventEntry) o).getComponent()==null) return false;
+        return this.getComponent().equals(((ULEventEntry) o).getComponent());
     }
 
     @Override
