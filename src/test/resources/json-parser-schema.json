@@ -35,42 +35,170 @@
       "description": "Exact timestamp of the occurance of the event in the EST timezone",
       "type": "string"
     },
-    "price": {
-      "type": "number",
-      "minimum": 0,
-      "exclusiveMinimum": true
+    "serverName": {
+      "description": "Name of the server placing the event onto transport pipeline",
+      "type": "string"
     },
-    "tags": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "minItems": 1,
-      "uniqueItems": true
+    "url": {
+      "description": "Full URL, as requeted by the client with all parts including query string",
+      "type": "string"
     },
-    "dimensions": {
-      "type": "object",
-      "properties": {
-        "length": {"type": "number"},
-        "width": {"type": "number"},
-        "height": {"type": "number"}
-      },
-      "required": ["length", "width", "height"]
+    "urlProtocol": {
+      "description": "Http(s) protocol part of URL",
+      "type": "string"
     },
-    "warehouseLocation": {
-      "description": "Coordinates of the warehouse with the product",
+    "urlDomain": {
+      "description": "Domain part of URL",
+      "type": "string"
+    },
+    "urlPath": {
+      "description": "Path part of URL",
+      "type": "string"
+    },
+    "urlPage": {
+      "description": "Page part of URL",
+      "type": "string"
+    },
+    "urlQueryString": {
+      "description": "Query string part of URL",
+      "type": "string"
+    },
+    "httpMethod": {
+      "description": "Method used in the HTTP request, extensions allowed",
+      "type": "string"
+    },
+    "httpCookies": {
+      "description": "Incoming HTTP cookies",
+      "type": "string"
+    },
+    "httpPostData": {
+      "description": "Incoming POST content",
+      "type": "string"
+    },
+    "httpContentType": {
+      "description": "Outgoing content type",
+      "type": "string"
+    },
+    "httpResponseCode": {
+      "description": "Web/Application Server response code",
+      "type": "string"
+    },
+    "httpResponseTime": {
+      "description": "Web/Application Server response time",
+      "type": "string"
+    },
+    "httpResponseSize": {
+      "description": "Web/Application Server response size",
+      "type": "string"
+    },
+    "clientIp": {
+      "description": "IPv4 client IP address",
+      "type": "string"
+    },
+    "clientIpHash": {
+      "description": "One-way hash of the IPv4 client IP address",
+      "type": "string"
+    },
+    "clientContinent": {
+      "description": "GeoIP resolved continent code",
+      "type": "string"
+    },
+    "clientCountry": {
+      "description": "GeoIP resolved ISO-3166-2 country code",
+      "type": "string"
+    },
+    "clientState": {
+      "description": "GeoIP resolved state/province code",
+      "type": "string"
+    },
+    "clientCounty": {
+      "description": "GeoIP reolved county name",
+      "type": "string"
+    },
+    "clientCity": {
+      "description": "GeoIP resolved city name",
+      "type": "string"
+    },
+    "clientDMA": {
+      "description": "GeoIP resolved Designated Marketing Area code",
+      "type": "string"
+    },
+    "clientMSA": {
+      "description": "GeoIP resolved Metropolitan Statistical Area code",
+      "type": "string"
+    },
+    "clientFIPS": {
+      "description": "GeoIP resolved FIPS State/County Code",
+      "type": "string"
+    },
+    "clientZipCode": {
+      "description": "GeoIP resolved postal zip code",
+      "type": "string"
+    },
+    "clientAreaCode": {
+      "description": "GeoIP resolved telephone area code",
+      "type": "string"
+    },
+    "clientLocation": {
+      "description": "GeoIP resolved lat/long coordinates of the clients location",
       "$ref": "http://json-schema.org/geo"
     },
-    "dateOfManufacture": {
-      "description": "manufacturing date",
+    "clientNetwork": {
+      "description": "GeoIP resolved name of the client network",
       "type": "string"
-
     },
-    "dateOfExpiry": {
-      "description": "expiry date",
+    "clientNetworkThroughput": {
+      "description": "GeoIP resolved estimate of client network throughput",
       "type": "string"
-
+    },
+    "clientCompany": {
+      "description": "GeoIP resolved name of the company registered with network",
+      "type": "string"
+    },
+    "clientUserAgent": {
+      "description": "User Agent header",
+      "type": "string"
+    },
+    "clientBrowserType": {
+      "description": "UA resolved client browser type",
+      "type": "string"
+    },
+    "clientBrowserVersion": {
+      "description": "UA resolved client browser version",
+      "type": "string"
+    },
+    "clientBrowserLanguage": {
+      "description": "Client browser language(s)",
+      "type": "string"
+    },
+    "clientPlatformType": {
+      "description": "UA resolved client platform type",
+      "type": "string"
+    },
+    "clientPlatformVersion": {
+      "description": "UA resolved client platform version",
+      "type": "string"
+    },
+    "clientScreenWidth": {
+      "description": "Monitor screen width",
+      "type": "string"
+    },
+    "clientScreenHeight": {
+      "description": "Monitor screen height",
+      "type": "string"
+    },
+    "clientColorDepth": {
+      "description": "Monitor color depth",
+      "type": "string"
+    },
+    "backFillRequired": {
+      "description": "Multi-part events requesting backfill merge",
+      "type": "string"
+    },
+    "eventDetail": {
+      "description": "Event specific payload",
+      "type": "object"
     }
   },
-  "required": ["id", "name", "price"]
+  "required": ["eventid", "application", "eventName"]
 }

@@ -68,7 +68,7 @@ public class ULEvent {
     private String clientUserAgent;                 // incoming
     private String clientBrowserType;               // derived
     private String clientBrowserVersion;            // derived
-    private String clientBrowserLanguage;           // derived
+    private String clientBrowserLanguage;           // incoming
     private String clientPlatformType;              // derived
     private String clientPlatformVersion;           // derived
 
@@ -495,5 +495,63 @@ public class ULEvent {
 
     public void setEventPartId(UUID eventPartId) {
         this.eventPartId = eventPartId;
+    }
+
+    @Override
+    public String toString() {
+        return "ULEvent{" +
+                "eventId=" + eventId +
+                ", eventPartId=" + eventPartId +
+                ", application='" + application + '\'' +
+                ", applicationBuildVersion='" + applicationBuildVersion + '\'' +
+                ", applicationBuildDate=" + applicationBuildDate +
+                ", eventName='" + eventName + '\'' +
+                ", eventDate=" + eventDate +
+                ", eventTimestamp=" + eventTimestamp +
+                ", serverName='" + serverName + '\'' +
+                ", url='" + url + '\'' +
+                ", urlProtocol='" + urlProtocol + '\'' +
+                ", urlDomain='" + urlDomain + '\'' +
+                ", urlPath='" + urlPath + '\'' +
+                ", urlPage='" + urlPage + '\'' +
+                ", urlQueryString='" + urlQueryString + '\'' +
+                ", httpMethod='" + httpMethod + '\'' +
+                ", httpCookies='" + httpCookies + '\'' +
+                ", httpPostData='" + httpPostData + '\'' +
+                ", httpContentType='" + httpContentType + '\'' +
+                ", httpResponseCode='" + httpResponseCode + '\'' +
+                ", httpResponseTime='" + httpResponseTime + '\'' +
+                ", httpResponseSize='" + httpResponseSize + '\'' +
+                ", clientIp=" + clientIp +
+                ", clientIpHash=" + clientIpHash +
+                ", clientContinent='" + clientContinent + '\'' +
+                ", clientCountry='" + clientCountry + '\'' +
+                ", clientCity='" + clientCity + '\'' +
+                ", clientState='" + clientState + '\'' +
+                ", clientCounty='" + clientCounty + '\'' +
+                ", clientNetwork='" + clientNetwork + '\'' +
+                ", clientNetworkThroughput='" + clientNetworkThroughput + '\'' +
+                ", clientDMA='" + clientDMA + '\'' +
+                ", clientMSA='" + clientMSA + '\'' +
+                ", clientFIPS='" + clientFIPS + '\'' +
+                ", clientTimeZone='" + clientTimeZone + '\'' +
+                ", clientZipCode='" + clientZipCode + '\'' +
+                ", clientPMSA='" + clientPMSA + '\'' +
+                ", clientAreaCode='" + clientAreaCode + '\'' +
+                ", clientLatitude='" + clientLatitude + '\'' +
+                ", clientLongitude='" + clientLongitude + '\'' +
+                ", clientCompany='" + clientCompany + '\'' +
+                ", clientUserAgent='" + clientUserAgent + '\'' +
+                ", clientBrowserType='" + clientBrowserType + '\'' +
+                ", clientBrowserVersion='" + clientBrowserVersion + '\'' +
+                ", clientBrowserLanguage='" + clientBrowserLanguage + '\'' +
+                ", clientPlatformType='" + clientPlatformType + '\'' +
+                ", clientPlatformVersion='" + clientPlatformVersion + '\'' +
+                ", clientScreenWidth='" + clientScreenWidth + '\'' +
+                ", clientScreenHeight='" + clientScreenHeight + '\'' +
+                ", clientColorDepth='" + clientColorDepth + '\'' +
+                ", backFillRequired=" + backFillRequired +
+                ", eventDetail=" + eventDetail +
+                '}';
     }
 }
