@@ -24,7 +24,7 @@ public class Application implements StreamingApplication {
         JsonParser parser = dag.addOperator("jsonparser", new JsonParser());
 
         parser.setClazz(ULEvent.class);
-        dag.getMeta(parser).getMeta(parser.out).getAttributes().put(Context.PortContext.TUPLE_CLASS, ULEventEntry.class);
+        dag.getMeta(parser).getMeta(parser.out).getAttributes().put(Context.PortContext.TUPLE_CLASS, ULEvent.class);
         parser.setJsonSchema(SchemaUtils.jarResourceFileToString("json-parser-schema.json"));
         ConsoleOutputOperator jsonObjectOp = dag.addOperator("jsonObjectOp", new ConsoleOutputOperator());
         ConsoleOutputOperator pojoOp = dag.addOperator("pojoOp", new ConsoleOutputOperator());

@@ -73,4 +73,5 @@ public class ULEventEntry extends KryoJdkContainer<ULEvent> implements Serializa
     public String toString() {
         return "ULEventEntry{}" + ( (getComponent() != null) ? getComponent().toString() : "null" );
     }
+
 }

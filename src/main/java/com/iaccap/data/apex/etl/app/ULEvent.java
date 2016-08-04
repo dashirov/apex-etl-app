@@ -17,18 +17,18 @@ public class ULEvent {
     // applications should use robust generators and prefer v4 UUID random based generator over v1
 
     // eventID - unique logical event GUID
-    private UUID eventId;                          // incoming
+    private String eventId;                          // incoming
     // eventPartId - unique record ID corresponding to either server side, browser side, middle tier side or backend side oart of the event
-    private UUID eventPartId;                      // incoming
+    private String eventPartId;                      // incoming
 
     private String application;                    // incoming
     private String applicationBuildVersion;        // incoming
-    private LocalDate applicationBuildDate;           // incoming
+    private String applicationBuildDate;           // incoming
 
     private String eventName;                      // incoming
 
-    private LocalDate eventDate;                   // derived
-    private LocalDateTime eventTimestamp;          // incoming
+    private String eventDate;                      // derived
+    private String eventTimestamp;                 // incoming
 
     private String serverName;                     // incoming
 
@@ -49,7 +49,7 @@ public class ULEvent {
 
     private InetAddress clientIp;                   // incoming
     // TODO: could be a 64-bit integer if storage in the database is more optimal, converting uuid to bigint may be a challange
-    private UUID clientIpHash;                      // derived
+    private String clientIpHash;                      // derived
 
     private String clientContinent;                 // enriched
     private String clientCountry;                   // enriched
@@ -87,10 +87,10 @@ public class ULEvent {
     }
 
     public UUID getEventId() {
-        return eventId;
+        return UUID.fromString(eventId);
     }
 
-    public void setEventId(UUID eventId) {
+    public void setEventId(String eventId) {
         this.eventId = eventId;
     }
 
@@ -111,18 +111,14 @@ public class ULEvent {
     }
 
     public LocalDate getApplicationBuildDate() {
-        return applicationBuildDate;
+        return LocalDate.parse(applicationBuildDate,ISODateTimeFormat.date());
     }
-
-    /**
-     * public void setApplicationBuildDate(LocalDate applicationBuildDate) {
-     * this.applicationBuildDate = applicationBuildDate;
-     * }
-     */
     public void setApplicationBuildDate(String dateString) {
-        this.applicationBuildDate = LocalDate.parse(dateString, ISODateTimeFormat.date());
-    }
+        // TODO: improve validation and serializable members of improve serialization
+        if ( LocalDate.parse(dateString, ISODateTimeFormat.date()).toString().equals(dateString))
+        this.applicationBuildDate = dateString ;
 
+    }
     public String getEventName() {
         return eventName;
     }
@@ -132,29 +128,21 @@ public class ULEvent {
     }
 
     public LocalDate getEventDate() {
-        return eventDate;
+        return LocalDate.parse(eventDate,ISODateTimeFormat.date());
     }
 
-    /**
-     * public void setEventDate(LocalDate eventDate) {
-     * this.eventDate = eventDate;
-     * }
-     */
     public void setEventDate(String dateString) {
-        this.eventDate = LocalDate.parse(dateString, ISODateTimeFormat.date());
+        if ( LocalDate.parse(dateString, ISODateTimeFormat.date()).toString(ISODateTimeFormat.date()).equals(dateString))
+        this.eventDate = dateString;
     }
 
     public LocalDateTime getEventTimestamp() {
-        return eventTimestamp;
+        return LocalDateTime.parse(eventTimestamp,ISODateTimeFormat.dateTime());
     }
 
-    /**
-     * public void setEventTimestamp(LocalDateTime eventTimestamp) {
-     * this.eventTimestamp = eventTimestamp;
-     * }
-     */
+
     public void setEventTimestamp(String timestampString) {
-        this.eventTimestamp = LocalDateTime.parse(timestampString, ISODateTimeFormat.dateTime());
+        this.eventTimestamp = LocalDateTime.parse(timestampString, ISODateTimeFormat.dateTime()).toString(ISODateTimeFormat.dateTime());
     }
 
     public String getServerName() {
@@ -262,10 +250,10 @@ public class ULEvent {
     }
 
     public UUID getClientIpHash() {
-        return clientIpHash;
+        return UUID.fromString(clientIpHash);
     }
 
-    public void setClientIpHash(UUID clientIpHash) {
+    public void setClientIpHash(String clientIpHash) {
         this.clientIpHash = clientIpHash;
     }
 
@@ -511,10 +499,10 @@ public class ULEvent {
     }
 
     public UUID getEventPartId() {
-        return eventPartId;
+        return UUID.fromString(eventPartId);
     }
 
-    public void setEventPartId(UUID eventPartId) {
+    public void setEventPartId(String eventPartId) {
         this.eventPartId = eventPartId;
     }
 

@@ -113,8 +113,6 @@ public class JsonParser extends Parser<byte[], KeyValPair<String, String>> {
             }
             objMapper = new ObjectMapper();
             objMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-            objMapper.findAndRegisterModules();
-
         } catch (ProcessingException | IOException e) {
             DTThrowable.wrapIfChecked(e);
         }
