@@ -156,6 +156,7 @@ public class JsonParser extends Parser<byte[], KeyValPair<String, String>>
       if (out.isConnected()) {
         out.emit(objMapper.readValue(tuple, clazz));
         emittedObjectCount++;
+          logger.info(objMapper.readValue(tuple,clazz).toString());
       }
     } catch (JSONException | ProcessingException | IOException e) {
       errorTupleCount++;
