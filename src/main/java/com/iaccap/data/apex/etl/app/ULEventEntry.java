@@ -23,7 +23,7 @@ public class ULEventEntry extends KryoJdkContainer<ULEvent> implements Serializa
     }
 
     /**
-     * Create a RomeFeedEntry using a Rome SyndEntry object.
+     * Create a ULEventEntry using a Rome SyndEntry object.
      *
      * @param ulEvent The ULEvent object
      */
