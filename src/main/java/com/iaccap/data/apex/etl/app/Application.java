@@ -65,7 +65,9 @@ public class Application implements StreamingApplication
         @Override
         public void emitTuples()
         {
-            output.emit(jsonSample.getBytes());
+            for (int i=0; i<=10000;i++) {
+                output.emit(jsonSample.getBytes());
+            }
         }
     }
 

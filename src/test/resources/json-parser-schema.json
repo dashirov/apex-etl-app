@@ -1,8 +1,76 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "ULEvent set",
+  "title": "UL Event set",
   "type": "object",
   "properties": {
+    "eventId": {
+      "description": "The UUID unique identifier for a logical multi-part event",
+      "type": "string"
+    },
+    "eventPartId": {
+      "description": "The UUID unique identifier for an event part. Parts are generated on browser, front-end, middle-tier, backend for a single logical event",
+      "type": "string"
+    },
+    "application": {
+      "description": "Application logging the event",
+      "type": "string"
+    },
+    "applicationBuildVersion": {
+      "description": "Version of the application logging the event",
+      "type": "string"
+    },
+    "applicationBuildDate": {
+      "description": "Build date of thie version of application logging the event in the EST timezone",
+      "type": "string"
+    },
+    "eventName": {
+      "description": "Name of an event being logged",
+      "type": "string"
+    },
+    "eventDate": {
+      "description": "Date of the occurance of this event in the EST timezone",
+      "type": "string"
+    },
+    "eventTimestamp": {
+      "description": "Exact timestamp of the occurance of the event in the EST timezone",
+      "type": "string"
+    },
+    "price": {
+      "type": "number",
+      "minimum": 0,
+      "exclusiveMinimum": true
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "dimensions": {
+      "type": "object",
+      "properties": {
+        "length": {"type": "number"},
+        "width": {"type": "number"},
+        "height": {"type": "number"}
+      },
+      "required": ["length", "width", "height"]
+    },
+    "warehouseLocation": {
+      "description": "Coordinates of the warehouse with the product",
+      "$ref": "http://json-schema.org/geo"
+    },
+    "dateOfManufacture": {
+      "description": "manufacturing date",
+      "type": "string"
+
+    },
+    "dateOfExpiry": {
+      "description": "expiry date",
+      "type": "string"
+
+    }
   },
-  "required": []
+  "required": ["id", "name", "price"]
 }

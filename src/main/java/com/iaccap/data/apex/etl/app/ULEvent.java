@@ -19,9 +19,9 @@ public class ULEvent {
 
     private String application;                    // incoming
     private String applicationBuildVersion;        // incoming
-    private String applicationBuildDate;           // incoming
+    private LocalDate applicationBuildDate;           // incoming
 
-    private String eventType;                      // incoming
+    private String eventName;                      // incoming
 
     private LocalDate eventDate;                   // derived
     private LocalDateTime eventTimestamp;          // incoming
@@ -104,20 +104,20 @@ public class ULEvent {
         this.applicationBuildVersion = applicationBuildVersion;
     }
 
-    public String getApplicationBuildDate() {
+    public LocalDate getApplicationBuildDate() {
         return applicationBuildDate;
     }
 
-    public void setApplicationBuildDate(String applicationBuildDate) {
+    public void setApplicationBuildDate(LocalDate applicationBuildDate) {
         this.applicationBuildDate = applicationBuildDate;
     }
 
-    public String getEventType() {
-        return eventType;
+    public String getEventName() {
+        return eventName;
     }
 
-    public void setEventType(String eventType) {
-        this.eventType = eventType;
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
     }
 
     public LocalDate getEventDate() {
