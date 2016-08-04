@@ -24,12 +24,17 @@ public class Application implements StreamingApplication {
         JsonParser parser = dag.addOperator("jsonparser", new JsonParser());
 
         parser.setClazz(ULEvent.class);
-        dag.getMeta(parser).getMeta(parser.out).getAttributes().put(Context.PortContext.TUPLE_CLASS, ULEvent.class);
+        dag.getMeta(parser).getMeta(parser.out).getAttributes().put(Context.PortContext.TUPLE_CLASS, ULEventEntry.class);
         parser.setJsonSchema(SchemaUtils.jarResourceFileToString("json-parser-schema.json"));
         ConsoleOutputOperator jsonObjectOp = dag.addOperator("jsonObjectOp", new ConsoleOutputOperator());
         ConsoleOutputOperator pojoOp = dag.addOperator("pojoOp", new ConsoleOutputOperator());
         ConsoleOutputOperator errorOp = dag.addOperator("errorOp", new ConsoleOutputOperator());
-        jsonObjectOp.setDebug(true);
+        //jsonObjectOp.setDebug(true);
+
+        AkamaiEdgescapeGeoIPExtractor geoIPExtractor = new AkamaiEdgescapeGeoIPExtractor();
+        geoIPExtractor.setServiceHost("dfdevrtwhbe1.df.jabodo.com");
+        geoIPExtractor.setServicePort(2001);
+        geoIPExtractor.setResponseTimeout(100);
 
 
         dag.addStream("input", input.output, parser.in);
@@ -66,9 +71,8 @@ public class Application implements StreamingApplication {
 
         @Override
         public void emitTuples() {
-            for (int i = 0; i <= 10000; i++) {
+            //for (int i = 0; i <= 2; i++)
                 output.emit(jsonSample.getBytes());
-            }
         }
     }
 

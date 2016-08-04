@@ -2,8 +2,12 @@ package com.iaccap.data.apex.etl.app;
 
 import java.net.InetAddress;
 import java.util.UUID;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
+import org.joda.time.format.ISODateTimeFormat;
 
 /**
  * Created by dtadmin on 8/3/16.
@@ -79,6 +83,8 @@ public class ULEvent {
     private Boolean backFillRequired;               // incoming
     private ULEventDetail eventDetail;              // pseudo container for application specific payload
 
+    public ULEvent() {
+    }
 
     public UUID getEventId() {
         return eventId;
@@ -108,8 +114,13 @@ public class ULEvent {
         return applicationBuildDate;
     }
 
-    public void setApplicationBuildDate(LocalDate applicationBuildDate) {
-        this.applicationBuildDate = applicationBuildDate;
+    /**
+     * public void setApplicationBuildDate(LocalDate applicationBuildDate) {
+     * this.applicationBuildDate = applicationBuildDate;
+     * }
+     */
+    public void setApplicationBuildDate(String dateString) {
+        this.applicationBuildDate = LocalDate.parse(dateString, ISODateTimeFormat.date());
     }
 
     public String getEventName() {
@@ -124,16 +135,26 @@ public class ULEvent {
         return eventDate;
     }
 
-    public void setEventDate(LocalDate eventDate) {
-        this.eventDate = eventDate;
+    /**
+     * public void setEventDate(LocalDate eventDate) {
+     * this.eventDate = eventDate;
+     * }
+     */
+    public void setEventDate(String dateString) {
+        this.eventDate = LocalDate.parse(dateString, ISODateTimeFormat.date());
     }
 
     public LocalDateTime getEventTimestamp() {
         return eventTimestamp;
     }
 
-    public void setEventTimestamp(LocalDateTime eventTimestamp) {
-        this.eventTimestamp = eventTimestamp;
+    /**
+     * public void setEventTimestamp(LocalDateTime eventTimestamp) {
+     * this.eventTimestamp = eventTimestamp;
+     * }
+     */
+    public void setEventTimestamp(String timestampString) {
+        this.eventTimestamp = LocalDateTime.parse(timestampString, ISODateTimeFormat.dateTime());
     }
 
     public String getServerName() {
@@ -553,5 +574,127 @@ public class ULEvent {
                 ", backFillRequired=" + backFillRequired +
                 ", eventDetail=" + eventDetail +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ULEvent ulEvent = (ULEvent) o;
+
+        return new EqualsBuilder()
+                .append(eventId, ulEvent.eventId)
+                .append(eventPartId, ulEvent.eventPartId)
+                .append(application, ulEvent.application)
+                .append(applicationBuildVersion, ulEvent.applicationBuildVersion)
+                .append(applicationBuildDate, ulEvent.applicationBuildDate)
+                .append(eventName, ulEvent.eventName)
+                .append(eventDate, ulEvent.eventDate)
+                .append(eventTimestamp, ulEvent.eventTimestamp)
+                .append(serverName, ulEvent.serverName)
+                .append(url, ulEvent.url)
+                .append(urlProtocol, ulEvent.urlProtocol)
+                .append(urlDomain, ulEvent.urlDomain)
+                .append(urlPath, ulEvent.urlPath)
+                .append(urlPage, ulEvent.urlPage)
+                .append(urlQueryString, ulEvent.urlQueryString)
+                .append(httpMethod, ulEvent.httpMethod)
+                .append(httpCookies, ulEvent.httpCookies)
+                .append(httpPostData, ulEvent.httpPostData)
+                .append(httpContentType, ulEvent.httpContentType)
+                .append(httpResponseCode, ulEvent.httpResponseCode)
+                .append(httpResponseTime, ulEvent.httpResponseTime)
+                .append(httpResponseSize, ulEvent.httpResponseSize)
+                .append(clientIp, ulEvent.clientIp)
+                .append(clientIpHash, ulEvent.clientIpHash)
+                .append(clientContinent, ulEvent.clientContinent)
+                .append(clientCountry, ulEvent.clientCountry)
+                .append(clientCity, ulEvent.clientCity)
+                .append(clientState, ulEvent.clientState)
+                .append(clientCounty, ulEvent.clientCounty)
+                .append(clientNetwork, ulEvent.clientNetwork)
+                .append(clientNetworkThroughput, ulEvent.clientNetworkThroughput)
+                .append(clientDMA, ulEvent.clientDMA)
+                .append(clientMSA, ulEvent.clientMSA)
+                .append(clientFIPS, ulEvent.clientFIPS)
+                .append(clientTimeZone, ulEvent.clientTimeZone)
+                .append(clientZipCode, ulEvent.clientZipCode)
+                .append(clientPMSA, ulEvent.clientPMSA)
+                .append(clientAreaCode, ulEvent.clientAreaCode)
+                .append(clientLatitude, ulEvent.clientLatitude)
+                .append(clientLongitude, ulEvent.clientLongitude)
+                .append(clientCompany, ulEvent.clientCompany)
+                .append(clientUserAgent, ulEvent.clientUserAgent)
+                .append(clientBrowserType, ulEvent.clientBrowserType)
+                .append(clientBrowserVersion, ulEvent.clientBrowserVersion)
+                .append(clientBrowserLanguage, ulEvent.clientBrowserLanguage)
+                .append(clientPlatformType, ulEvent.clientPlatformType)
+                .append(clientPlatformVersion, ulEvent.clientPlatformVersion)
+                .append(clientScreenWidth, ulEvent.clientScreenWidth)
+                .append(clientScreenHeight, ulEvent.clientScreenHeight)
+                .append(clientColorDepth, ulEvent.clientColorDepth)
+                .append(backFillRequired, ulEvent.backFillRequired)
+                .append(eventDetail, ulEvent.eventDetail)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(eventId)
+                .append(eventPartId)
+                .append(application)
+                .append(applicationBuildVersion)
+                .append(applicationBuildDate)
+                .append(eventName)
+                .append(eventDate)
+                .append(eventTimestamp)
+                .append(serverName)
+                .append(url)
+                .append(urlProtocol)
+                .append(urlDomain)
+                .append(urlPath)
+                .append(urlPage)
+                .append(urlQueryString)
+                .append(httpMethod)
+                .append(httpCookies)
+                .append(httpPostData)
+                .append(httpContentType)
+                .append(httpResponseCode)
+                .append(httpResponseTime)
+                .append(httpResponseSize)
+                .append(clientIp)
+                .append(clientIpHash)
+                .append(clientContinent)
+                .append(clientCountry)
+                .append(clientCity)
+                .append(clientState)
+                .append(clientCounty)
+                .append(clientNetwork)
+                .append(clientNetworkThroughput)
+                .append(clientDMA)
+                .append(clientMSA)
+                .append(clientFIPS)
+                .append(clientTimeZone)
+                .append(clientZipCode)
+                .append(clientPMSA)
+                .append(clientAreaCode)
+                .append(clientLatitude)
+                .append(clientLongitude)
+                .append(clientCompany)
+                .append(clientUserAgent)
+                .append(clientBrowserType)
+                .append(clientBrowserVersion)
+                .append(clientBrowserLanguage)
+                .append(clientPlatformType)
+                .append(clientPlatformVersion)
+                .append(clientScreenWidth)
+                .append(clientScreenHeight)
+                .append(clientColorDepth)
+                .append(backFillRequired)
+                .append(eventDetail)
+                .toHashCode();
     }
 }
