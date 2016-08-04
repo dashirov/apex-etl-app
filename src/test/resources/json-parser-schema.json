@@ -81,15 +81,15 @@
     },
     "httpResponseCode": {
       "description": "Web/Application Server response code",
-      "type": "string"
+      "type": "number"
     },
     "httpResponseTime": {
       "description": "Web/Application Server response time",
-      "type": "string"
+      "type": "number"
     },
     "httpResponseSize": {
       "description": "Web/Application Server response size",
-      "type": "string"
+      "type": "number"
     },
     "clientIp": {
       "description": "IPv4 client IP address",
@@ -181,24 +181,24 @@
     },
     "clientScreenWidth": {
       "description": "Monitor screen width",
-      "type": "string"
+      "type": "number"
     },
     "clientScreenHeight": {
       "description": "Monitor screen height",
-      "type": "string"
+      "type": "number"
     },
     "clientColorDepth": {
       "description": "Monitor color depth",
-      "type": "string"
+      "type": "number"
     },
     "backFillRequired": {
       "description": "Multi-part events requesting backfill merge",
-      "type": "string"
+      "type": "boolean"
     },
     "eventDetail": {
       "description": "Event specific payload",
       "type": "object"
     }
   },
-  "required": ["eventid", "application", "eventName"]
+  "required": ["eventId", "application", "eventName"]
 }

@@ -12,37 +12,39 @@ import com.datatorrent.api.annotation.ApplicationAnnotation;
 import com.datatorrent.api.DAG.Locality;
 import com.datatorrent.lib.io.ConsoleOutputOperator;
 
-@ApplicationAnnotation(name="UnifiedLoggingETLApplication")
-public class Application implements StreamingApplication
-{
+@ApplicationAnnotation(name = "UnifiedLoggingETLApplication")
+public class Application implements StreamingApplication {
 
-  @Override
-  public void populateDAG(DAG dag, Configuration conf)
-  {
-    // Sample DAG with 2 operators
-    // Replace this code with the DAG you want to build
+    @Override
+    public void populateDAG(DAG dag, Configuration conf) {
+        // Sample DAG with 2 operators
+        // Replace this code with the DAG you want to build
 
-    JsonDataEmitterOperator input = dag.addOperator("data", new JsonDataEmitterOperator());
-    JsonParser parser = dag.addOperator("jsonparser", new JsonParser());
+        JsonDataEmitterOperator input = dag.addOperator("data", new JsonDataEmitterOperator());
+        JsonParser parser = dag.addOperator("jsonparser", new JsonParser());
 
-    parser.setClazz(ULEvent.class);
-    dag.getMeta(parser).getMeta(parser.out).getAttributes().put(Context.PortContext.TUPLE_CLASS, ULEvent.class);
-    parser.setJsonSchema(SchemaUtils.jarResourceFileToString("json-parser-schema.json"));
-    ConsoleOutputOperator jsonObjectOp = dag.addOperator("jsonObjectOp", new ConsoleOutputOperator());
-    ConsoleOutputOperator pojoOp = dag.addOperator("pojoOp", new ConsoleOutputOperator());
-    jsonObjectOp.setDebug(true);
-    dag.addStream("input", input.output, parser.in);
-    dag.addStream("output", parser.parsedOutput, jsonObjectOp.input);
-    dag.addStream("pojo", parser.out, pojoOp.input);
-  }
+        parser.setClazz(ULEvent.class);
+        dag.getMeta(parser).getMeta(parser.out).getAttributes().put(Context.PortContext.TUPLE_CLASS, ULEvent.class);
+        parser.setJsonSchema(SchemaUtils.jarResourceFileToString("json-parser-schema.json"));
+        ConsoleOutputOperator jsonObjectOp = dag.addOperator("jsonObjectOp", new ConsoleOutputOperator());
+        ConsoleOutputOperator pojoOp = dag.addOperator("pojoOp", new ConsoleOutputOperator());
+        ConsoleOutputOperator errorOp = dag.addOperator("errorOp", new ConsoleOutputOperator());
+        jsonObjectOp.setDebug(true);
 
-    public static class JsonDataEmitterOperator extends BaseOperator implements InputOperator
-    {
+
+        dag.addStream("input", input.output, parser.in);
+        dag.addStream("output", parser.parsedOutput, jsonObjectOp.input);
+        dag.addStream("pojo", parser.out, pojoOp.input);
+        dag.addStream("err", parser.err,errorOp.input);
+    }
+
+    public static class JsonDataEmitterOperator extends BaseOperator implements InputOperator {
         public static String jsonSample = "{\n" +
                 "                \"application\": \"Thermometer\",\n" +
                 "                \"applicationBuildVersion\": \"1.0.0\",\n" +
                 "                \"applicationBuildDate\": \"2006-01-01\",\n" +
-                "                \"eventType\": \"PageView\",\n" +
+                "                \"eventName\": \"PageView\",\n" +
+                "                \"eventId\": \"3AC3D4B1-4642-44C7-AE7A-DF8EC8709C9F\",\n" +
                 "                \"eventTimestamp\": \"2015-11-04T09:00:31.234Z\",\n" +
                 "                \"httpMethod\": \"GET\",\n" +
                 "                \"httpUrl\": \"http://www.thermometer.com/#/\",\n" +
@@ -63,9 +65,8 @@ public class Application implements StreamingApplication
         public final transient DefaultOutputPort<byte[]> output = new DefaultOutputPort<byte[]>();
 
         @Override
-        public void emitTuples()
-        {
-            for (int i=0; i<=10000;i++) {
+        public void emitTuples() {
+            for (int i = 0; i <= 10000; i++) {
                 output.emit(jsonSample.getBytes());
             }
         }

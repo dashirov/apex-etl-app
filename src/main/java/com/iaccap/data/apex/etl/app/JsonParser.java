@@ -152,11 +152,12 @@ public class JsonParser extends Parser<byte[], KeyValPair<String, String>>
       if (parsedOutput.isConnected()) {
         parsedOutput.emit(new JSONObject(incomingString));
         parsedOutputCount++;
+          logger.debug(new JSONObject(incomingString).toString(2)); //TODO: remove
       }
       if (out.isConnected()) {
         out.emit(objMapper.readValue(tuple, clazz));
         emittedObjectCount++;
-          logger.info(objMapper.readValue(tuple,clazz).toString());
+          logger.debug(objMapper.readValue(tuple,clazz).toString()); //TODO: remove
       }
     } catch (JSONException | ProcessingException | IOException e) {
       errorTupleCount++;
