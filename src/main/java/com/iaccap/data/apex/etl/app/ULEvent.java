@@ -1,10 +1,11 @@
 package com.iaccap.data.apex.etl.app;
 
 import java.net.InetAddress;
+import java.util.Map;
 import java.util.UUID;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
+
+import com.esotericsoftware.jsonbeans.Json;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 import org.joda.time.format.ISODateTimeFormat;
@@ -81,7 +82,7 @@ public class ULEvent {
     private String clientColorDepth;                // incoming
 
     private Boolean backFillRequired;               // incoming
-    private ULEventDetail eventDetail;              // pseudo container for application specific payload
+    private Map<String, Object> eventDetail;        // pseudo container for application specific payload
 
     public ULEvent() {
     }
@@ -457,13 +458,12 @@ public class ULEvent {
         this.clientColorDepth = clientColorDepth;
     }
 
-    public ULEventDetail getEventDetail() {
+    public Map<String, Object> getEventDetail() {
         return eventDetail;
     }
 
-    public void setEventDetail(ULEventDetail eventDetail) {
+    public void setEventDetail(Map<String, Object> eventDetail) {
         this.eventDetail = eventDetail;
-        eventDetail.setParentULEvent(this);
     }
 
     public String getHttpMethod() {
@@ -560,129 +560,10 @@ public class ULEvent {
                 ", clientScreenHeight='" + clientScreenHeight + '\'' +
                 ", clientColorDepth='" + clientColorDepth + '\'' +
                 ", backFillRequired=" + backFillRequired +
-                ", eventDetail=" + eventDetail +
+                ", eventDetail=" + new Json().toJson(eventDetail) +
                 '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
 
-        if (o == null || getClass() != o.getClass()) return false;
 
-        ULEvent ulEvent = (ULEvent) o;
-
-        return new EqualsBuilder()
-                .append(eventId, ulEvent.eventId)
-                .append(eventPartId, ulEvent.eventPartId)
-                .append(application, ulEvent.application)
-                .append(applicationBuildVersion, ulEvent.applicationBuildVersion)
-                .append(applicationBuildDate, ulEvent.applicationBuildDate)
-                .append(eventName, ulEvent.eventName)
-                .append(eventDate, ulEvent.eventDate)
-                .append(eventTimestamp, ulEvent.eventTimestamp)
-                .append(serverName, ulEvent.serverName)
-                .append(url, ulEvent.url)
-                .append(urlProtocol, ulEvent.urlProtocol)
-                .append(urlDomain, ulEvent.urlDomain)
-                .append(urlPath, ulEvent.urlPath)
-                .append(urlPage, ulEvent.urlPage)
-                .append(urlQueryString, ulEvent.urlQueryString)
-                .append(httpMethod, ulEvent.httpMethod)
-                .append(httpCookies, ulEvent.httpCookies)
-                .append(httpPostData, ulEvent.httpPostData)
-                .append(httpContentType, ulEvent.httpContentType)
-                .append(httpResponseCode, ulEvent.httpResponseCode)
-                .append(httpResponseTime, ulEvent.httpResponseTime)
-                .append(httpResponseSize, ulEvent.httpResponseSize)
-                .append(clientIp, ulEvent.clientIp)
-                .append(clientIpHash, ulEvent.clientIpHash)
-                .append(clientContinent, ulEvent.clientContinent)
-                .append(clientCountry, ulEvent.clientCountry)
-                .append(clientCity, ulEvent.clientCity)
-                .append(clientState, ulEvent.clientState)
-                .append(clientCounty, ulEvent.clientCounty)
-                .append(clientNetwork, ulEvent.clientNetwork)
-                .append(clientNetworkThroughput, ulEvent.clientNetworkThroughput)
-                .append(clientDMA, ulEvent.clientDMA)
-                .append(clientMSA, ulEvent.clientMSA)
-                .append(clientFIPS, ulEvent.clientFIPS)
-                .append(clientTimeZone, ulEvent.clientTimeZone)
-                .append(clientZipCode, ulEvent.clientZipCode)
-                .append(clientPMSA, ulEvent.clientPMSA)
-                .append(clientAreaCode, ulEvent.clientAreaCode)
-                .append(clientLatitude, ulEvent.clientLatitude)
-                .append(clientLongitude, ulEvent.clientLongitude)
-                .append(clientCompany, ulEvent.clientCompany)
-                .append(clientUserAgent, ulEvent.clientUserAgent)
-                .append(clientBrowserType, ulEvent.clientBrowserType)
-                .append(clientBrowserVersion, ulEvent.clientBrowserVersion)
-                .append(clientBrowserLanguage, ulEvent.clientBrowserLanguage)
-                .append(clientPlatformType, ulEvent.clientPlatformType)
-                .append(clientPlatformVersion, ulEvent.clientPlatformVersion)
-                .append(clientScreenWidth, ulEvent.clientScreenWidth)
-                .append(clientScreenHeight, ulEvent.clientScreenHeight)
-                .append(clientColorDepth, ulEvent.clientColorDepth)
-                .append(backFillRequired, ulEvent.backFillRequired)
-                .append(eventDetail, ulEvent.eventDetail)
-                .isEquals();
-    }
-
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder(17, 37)
-                .append(eventId)
-                .append(eventPartId)
-                .append(application)
-                .append(applicationBuildVersion)
-                .append(applicationBuildDate)
-                .append(eventName)
-                .append(eventDate)
-                .append(eventTimestamp)
-                .append(serverName)
-                .append(url)
-                .append(urlProtocol)
-                .append(urlDomain)
-                .append(urlPath)
-                .append(urlPage)
-                .append(urlQueryString)
-                .append(httpMethod)
-                .append(httpCookies)
-                .append(httpPostData)
-                .append(httpContentType)
-                .append(httpResponseCode)
-                .append(httpResponseTime)
-                .append(httpResponseSize)
-                .append(clientIp)
-                .append(clientIpHash)
-                .append(clientContinent)
-                .append(clientCountry)
-                .append(clientCity)
-                .append(clientState)
-                .append(clientCounty)
-                .append(clientNetwork)
-                .append(clientNetworkThroughput)
-                .append(clientDMA)
-                .append(clientMSA)
-                .append(clientFIPS)
-                .append(clientTimeZone)
-                .append(clientZipCode)
-                .append(clientPMSA)
-                .append(clientAreaCode)
-                .append(clientLatitude)
-                .append(clientLongitude)
-                .append(clientCompany)
-                .append(clientUserAgent)
-                .append(clientBrowserType)
-                .append(clientBrowserVersion)
-                .append(clientBrowserLanguage)
-                .append(clientPlatformType)
-                .append(clientPlatformVersion)
-                .append(clientScreenWidth)
-                .append(clientScreenHeight)
-                .append(clientColorDepth)
-                .append(backFillRequired)
-                .append(eventDetail)
-                .toHashCode();
-    }
 }

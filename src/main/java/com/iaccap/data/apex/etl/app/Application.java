@@ -24,7 +24,7 @@ public class Application implements StreamingApplication {
         JsonParser parser = dag.addOperator("jsonparser", new JsonParser());
 
         parser.setClazz(ULEvent.class);
-        dag.getMeta(parser).getMeta(parser.out).getAttributes().put(Context.PortContext.TUPLE_CLASS, ULEvent.class);
+        dag.getMeta(parser).getMeta(parser.out).getAttributes().put(Context.PortContext.TUPLE_CLASS, ULEventMap.class);
         parser.setJsonSchema(SchemaUtils.jarResourceFileToString("json-parser-schema.json"));
         ConsoleOutputOperator jsonObjectOp = dag.addOperator("jsonObjectOp", new ConsoleOutputOperator());
         ConsoleOutputOperator pojoOp = dag.addOperator("pojoOp", new ConsoleOutputOperator());
@@ -64,7 +64,8 @@ public class Application implements StreamingApplication {
                 "                \"clientScreenWidth\": 1360,\n" +
                 "                \"clientScreenHeight\": 768,\n" +
                 "                \"clientScreenColorDepth\": 24,\n" +
-                "                \"backFillRequired\": false\n" +
+                "                \"backFillRequired\": false,\n" +
+                "                \"eventDetail\":{\"thisIsJson\":true,\"key\":{\"key\":\"value\",\"intKey\":12223,\"arrKey\":[1,\"one\",true]}}\n"+
                 "}";
 
         public final transient DefaultOutputPort<byte[]> output = new DefaultOutputPort<byte[]>();

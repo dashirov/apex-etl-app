@@ -19,9 +19,12 @@
 package com.iaccap.data.apex.etl.app;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 import com.datatorrent.lib.codec.KryoJdkContainer;
+import com.datatorrent.lib.logs.InformationExtractor;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import org.slf4j.Logger;
@@ -83,6 +86,12 @@ public class JsonParser extends Parser<byte[], KeyValPair<String, String>> {
     /**
      * Contents of the schema.Schema is specified as per http://json-schema.org/
      */
+    private final Map<String, InformationExtractor> appInfoExtractors = new HashMap<String, InformationExtractor>();
+    public enum extractor {
+        GEOIP,
+        UA
+    }
+
     private String jsonSchema;
     private transient JsonSchema schema;
     private transient ObjectMapper objMapper;
