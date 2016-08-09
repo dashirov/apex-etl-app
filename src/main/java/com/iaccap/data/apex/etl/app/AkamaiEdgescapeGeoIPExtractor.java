@@ -35,6 +35,7 @@ public class AkamaiEdgescapeGeoIPExtractor   implements InformationExtractor{
     @NotNull
     private int responseTimeout;
 
+    private Map<String,String> mapReMap;
 
     private transient AkaData data;
 
@@ -59,12 +60,17 @@ public class AkamaiEdgescapeGeoIPExtractor   implements InformationExtractor{
         // TODO: maintain default_answer statistics
 
         // TODO: maintain latency statistics
+        // Should this guy return JsonNode?
+
         Map<String, Object> m = new HashMap<String, Object>();
         try {
             data = new AkaData(value.toString(),responseTimeout);
             if (data != null) {
                 for (int i=0; i<data.results.length; i++){
-                    m.put (data.results[i][0],data.results[i][1]);
+                    if ( mapReMap!=null && mapReMap.containsKey(data.results[i][0]) ) {
+                        m.put(mapReMap.get(data.results[i][0]), data.results[i][1]);
+                    }
+                    else m.put(data.results[i][0],data.results[i][1]);
                 }
             }
         }
@@ -108,5 +114,13 @@ public class AkamaiEdgescapeGeoIPExtractor   implements InformationExtractor{
      */
     public void setResponseTimeout(int responseTimeout) {
         this.responseTimeout = responseTimeout;
+    }
+
+    public Map<String, String> getMapReMap() {
+        return mapReMap;
+    }
+
+    public void setMapReMap(Map<String, String> mapReMap) {
+        this.mapReMap = mapReMap;
     }
 }

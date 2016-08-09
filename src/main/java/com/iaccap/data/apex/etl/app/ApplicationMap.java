@@ -4,39 +4,45 @@
 package com.iaccap.data.apex.etl.app;
 
 import com.datatorrent.api.*;
+import com.datatorrent.api.annotation.ApplicationAnnotation;
 import com.datatorrent.common.util.BaseOperator;
 import com.datatorrent.lib.appdata.schemas.SchemaUtils;
-import org.apache.hadoop.conf.Configuration;
-
-import com.datatorrent.api.annotation.ApplicationAnnotation;
-import com.datatorrent.api.DAG.Locality;
 import com.datatorrent.lib.io.ConsoleOutputOperator;
+import com.google.common.collect.ImmutableMap;
+import org.apache.hadoop.conf.Configuration;
+import com.datatorrent.lib.stream.JsonByteArrayOperator;
 
-@ApplicationAnnotation(name = "UnifiedLoggingETLApplication")
-public class Application implements StreamingApplication {
+import java.util.HashMap;
+import java.util.Map;
+
+@ApplicationAnnotation(name = "UnifiedLoggingETLApplicationV2")
+public class ApplicationMap implements StreamingApplication {
 
     @Override
     public void populateDAG(DAG dag, Configuration conf) {
-        // Sample DAG with 2 operators
-        // Replace this code with the DAG you want to build
-
-        JsonDataEmitterOperator input = dag.addOperator("data", new JsonDataEmitterOperator());
-        JsonParser parser = dag.addOperator("jsonparser", new JsonParser());
-
-        parser.setClazz(ULEventMap.class);
-        dag.getMeta(parser).getMeta(parser.out).getAttributes().put(Context.PortContext.TUPLE_CLASS, ULEventMap.class);
-        parser.setJsonSchema(SchemaUtils.jarResourceFileToString("json-parser-schema.json"));
-        ConsoleOutputOperator jsonObjectOp = dag.addOperator("jsonObjectOp", new ConsoleOutputOperator());
-        ConsoleOutputOperator pojoOp = dag.addOperator("pojoOp", new ConsoleOutputOperator());
-        ConsoleOutputOperator errorOp = dag.addOperator("errorOp", new ConsoleOutputOperator());
-        jsonObjectOp.setDebug(true);
 
 
+        JsonDataEmitterOperator input = dag.addOperator("sampleDataEmitter", new JsonDataEmitterOperator());
+        JsonByteArrayOperator parser  = dag.addOperator("genericJsonParser", new JsonByteArrayOperator());
+        MaxMindGeoIPOperator clientGeoIpEnricher = dag.addOperator("clientGeoIpEnchicher",new MaxMindGeoIPOperator());
+        parser.setConcatenationCharacter('.');
+        clientGeoIpEnricher.setLookupKey("clientIp");
+        Map <String,String> clientGeoIPReMap = new HashMap<>();
+        clientGeoIPReMap.put("countryCode","clientCountry");
+        clientGeoIPReMap.put("city","clientCity");
+        clientGeoIpEnricher.setMapReMap(clientGeoIPReMap);
 
-        dag.addStream("input", input.output, parser.in);
-        dag.addStream("output", parser.parsedOutput, jsonObjectOp.input);
-        dag.addStream("pojo", parser.out, pojoOp.input);
-        dag.addStream("err", parser.err,errorOp.input);
+
+        ConsoleOutputOperator console1 = dag.addOperator("console1", new ConsoleOutputOperator());
+        //ConsoleOutputOperator console2 = dag.addOperator("console2", new ConsoleOutputOperator());
+        //ConsoleOutputOperator console3 = dag.addOperator("console3", new ConsoleOutputOperator());
+
+
+        dag.addStream("input", input.output, parser.input);
+        dag.addStream("mapToGeoIP", parser.outputFlatMap, clientGeoIpEnricher.inputPort);
+        dag.addStream("enrichedToConsole",clientGeoIpEnricher.outputPort,console1.input);
+        //dag.addStream("parsedJson", parser.outputJsonObject, console2.input);
+        //dag.addStream("parsedMap", parser.outputMap,console3.input);
     }
 
     public static class JsonDataEmitterOperator extends BaseOperator implements InputOperator {
@@ -51,7 +57,7 @@ public class Application implements StreamingApplication {
                 "                \"httpUrl\": \"http://www.thermometer.com/#/\",\n" +
                 "                \"clientBrowserLanguage\": \"en-US\",\n" +
                 "                \"httpResponseCode\": 204,\n" +
-                "                \"clientIp\": \"102.93.156.12\",\n" +
+                "                \"clientIp\": \"98.139.183.24\",\n" +
                 "                \"serverName\": \"fe1.thermometer.net\",\n" +
                 "                \"clientUserAgent\": \"Mozilla/5.0 (Windows NT 6.2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.80 Safari/537.36\",\n" +
                 "                \"httpResponseTime\": 1,\n" +

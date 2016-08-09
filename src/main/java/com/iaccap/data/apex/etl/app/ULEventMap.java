@@ -308,16 +308,9 @@ public class ULEventMap {
         this.event.put(CommonSchemaAttr.CLIENT_IP.key(), clientIp);
     }
     @JsonProperty
-    public  InetAddress getClientIp(){
-        try {
-        return (InetAddress.getByName( (String) event.get(CommonSchemaAttr.CLIENT_IP.key())));
-        } catch (UnknownHostException e){
-            return null;
-        }
+    public  String getClientIp(){
+        return (String) event.get(CommonSchemaAttr.CLIENT_IP.key());
     }
-public String getClientIpString(){
-    return (String) event.get(CommonSchemaAttr.CLIENT_IP.key());
-}
     @JsonProperty
     public void setClientIpHash(String clientIpHash){
         this.event.put(CommonSchemaAttr.CLIENT_IPHASH.key(), clientIpHash);

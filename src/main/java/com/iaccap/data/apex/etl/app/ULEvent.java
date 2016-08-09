@@ -9,10 +9,13 @@ import com.esotericsoftware.jsonbeans.Json;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 import org.joda.time.format.ISODateTimeFormat;
+import com.esotericsoftware.kryo.DefaultSerializer;
+import com.esotericsoftware.kryo.serializers.JavaSerializer;
 
 /**
  * Created by dtadmin on 8/3/16.
  */
+
 public class ULEvent {
     //always use com.fasterxml.uuid:java-uuid-generator comparator
     // applications should use robust generators and prefer v4 UUID random based generator over v1

@@ -83,14 +83,11 @@ import com.datatorrent.netlet.util.DTThrowable;
 @InterfaceStability.Evolving
 public class JsonParser extends Parser<byte[], KeyValPair<String, String>> {
 
+    // private final Map<String, InformationExtractor> appInfoExtractors = new HashMap<String, InformationExtractor>();
     /**
      * Contents of the schema.Schema is specified as per http://json-schema.org/
      */
-    private final Map<String, InformationExtractor> appInfoExtractors = new HashMap<String, InformationExtractor>();
-    public enum extractor {
-        GEOIP,
-        UA
-    }
+
 
     private String jsonSchema;
     private transient JsonSchema schema;

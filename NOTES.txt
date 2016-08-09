@@ -1,0 +1,9 @@
+                Iterator it = attributeInformationExtractors.entrySet().iterator();
+                while(it.hasNext()){
+                    Map.Entry pair = (Map.Entry)it.next();
+                    JsonNode possibleMatch = data.findPath( pair.getKey().toString() );
+                    if ( possibleMatch != null && !possibleMatch.isNull()  ){
+                        InformationExtractor extractor =  (InformationExtractor) pair.getValue();
+                        Map<String,Object> extracted = extractor.extractInformation(possibleMatch.asText());
+                    }
+                }

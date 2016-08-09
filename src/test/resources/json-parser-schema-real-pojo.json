@@ -1,0 +1,204 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "UL Event set",
+  "type": "object",
+  "properties": {
+    "eventId": {
+      "description": "The UUID unique identifier for a logical multi-part event",
+      "type": "string"
+    },
+    "eventPartId": {
+      "description": "The UUID unique identifier for an event part. Parts are generated on browser, front-end, middle-tier, backend for a single logical event",
+      "type": "string"
+    },
+    "application": {
+      "description": "Application logging the event",
+      "type": "string"
+    },
+    "applicationBuildVersion": {
+      "description": "Version of the application logging the event",
+      "type": "string"
+    },
+    "applicationBuildDate": {
+      "description": "Build date of thie version of application logging the event in the EST timezone",
+      "type": "string"
+    },
+    "eventName": {
+      "description": "Name of an event being logged",
+      "type": "string"
+    },
+    "eventDate": {
+      "description": "Date of the occurance of this event in the EST timezone",
+      "type": "string"
+    },
+    "eventTimestamp": {
+      "description": "Exact timestamp of the occurance of the event in the EST timezone",
+      "type": "string"
+    },
+    "serverName": {
+      "description": "Name of the server placing the event onto transport pipeline",
+      "type": "string"
+    },
+    "url": {
+      "description": "Full URL, as requeted by the client with all parts including query string",
+      "type": "string"
+    },
+    "urlProtocol": {
+      "description": "Http(s) protocol part of URL",
+      "type": "string"
+    },
+    "urlDomain": {
+      "description": "Domain part of URL",
+      "type": "string"
+    },
+    "urlPath": {
+      "description": "Path part of URL",
+      "type": "string"
+    },
+    "urlPage": {
+      "description": "Page part of URL",
+      "type": "string"
+    },
+    "urlQueryString": {
+      "description": "Query string part of URL",
+      "type": "string"
+    },
+    "httpMethod": {
+      "description": "Method used in the HTTP request, extensions allowed",
+      "type": "string"
+    },
+    "httpCookies": {
+      "description": "Incoming HTTP cookies",
+      "type": "string"
+    },
+    "httpPostData": {
+      "description": "Incoming POST content",
+      "type": "string"
+    },
+    "httpContentType": {
+      "description": "Outgoing content type",
+      "type": "string"
+    },
+    "httpResponseCode": {
+      "description": "Web/Application Server response code",
+      "type": "number"
+    },
+    "httpResponseTime": {
+      "description": "Web/Application Server response time",
+      "type": "number"
+    },
+    "httpResponseSize": {
+      "description": "Web/Application Server response size",
+      "type": "number"
+    },
+    "clientIp": {
+      "description": "IPv4 client IP address",
+      "type": "string"
+    },
+    "clientIpHash": {
+      "description": "One-way hash of the IPv4 client IP address",
+      "type": "string"
+    },
+    "clientContinent": {
+      "description": "GeoIP resolved continent code",
+      "type": "string"
+    },
+    "clientCountry": {
+      "description": "GeoIP resolved ISO-3166-2 country code",
+      "type": "string"
+    },
+    "clientState": {
+      "description": "GeoIP resolved state/province code",
+      "type": "string"
+    },
+    "clientCounty": {
+      "description": "GeoIP reolved county name",
+      "type": "string"
+    },
+    "clientCity": {
+      "description": "GeoIP resolved city name",
+      "type": "string"
+    },
+    "clientDMA": {
+      "description": "GeoIP resolved Designated Marketing Area code",
+      "type": "string"
+    },
+    "clientMSA": {
+      "description": "GeoIP resolved Metropolitan Statistical Area code",
+      "type": "string"
+    },
+    "clientFIPS": {
+      "description": "GeoIP resolved FIPS State/County Code",
+      "type": "string"
+    },
+    "clientZipCode": {
+      "description": "GeoIP resolved postal zip code",
+      "type": "string"
+    },
+    "clientAreaCode": {
+      "description": "GeoIP resolved telephone area code",
+      "type": "string"
+    },
+    "clientLocation": {
+      "description": "GeoIP resolved lat/long coordinates of the clients location",
+      "$ref": "http://json-schema.org/geo"
+    },
+    "clientNetwork": {
+      "description": "GeoIP resolved name of the client network",
+      "type": "string"
+    },
+    "clientNetworkThroughput": {
+      "description": "GeoIP resolved estimate of client network throughput",
+      "type": "string"
+    },
+    "clientCompany": {
+      "description": "GeoIP resolved name of the company registered with network",
+      "type": "string"
+    },
+    "clientUserAgent": {
+      "description": "User Agent header",
+      "type": "string"
+    },
+    "clientBrowserType": {
+      "description": "UA resolved client browser type",
+      "type": "string"
+    },
+    "clientBrowserVersion": {
+      "description": "UA resolved client browser version",
+      "type": "string"
+    },
+    "clientBrowserLanguage": {
+      "description": "Client browser language(s)",
+      "type": "string"
+    },
+    "clientPlatformType": {
+      "description": "UA resolved client platform type",
+      "type": "string"
+    },
+    "clientPlatformVersion": {
+      "description": "UA resolved client platform version",
+      "type": "string"
+    },
+    "clientScreenWidth": {
+      "description": "Monitor screen width",
+      "type": "number"
+    },
+    "clientScreenHeight": {
+      "description": "Monitor screen height",
+      "type": "number"
+    },
+    "clientColorDepth": {
+      "description": "Monitor color depth",
+      "type": "number"
+    },
+    "backFillRequired": {
+      "description": "Multi-part events requesting backfill merge",
+      "type": "boolean"
+    },
+    "eventDetail": {
+      "description": "Event specific payload",
+      "type": "object"
+    }
+  },
+  "required": ["eventId", "application", "eventName"]
+}
