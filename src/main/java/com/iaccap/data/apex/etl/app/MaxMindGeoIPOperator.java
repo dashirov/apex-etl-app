@@ -47,7 +47,7 @@ public class MaxMindGeoIPOperator extends BaseOperator {
      * The local path that contains the maxmind "legacy" GeoIP db
      */
     @NotNull
-    private String lookupKey = "clientIp";
+    private String lookupKey = "ip";
 
     private Map<String, String> mapReMap;
 
